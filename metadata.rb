@@ -4,5 +4,5 @@ maintainer_email 'phpvagrantmulti@gmail.com'
 license          'GPL v3'
 description      'Installs/Configures the php environment'
 long_description 'Installs/Configures the php environment'
-version          '0.1.0'
+version          '0.1.1'
 

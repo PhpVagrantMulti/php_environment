@@ -60,6 +60,8 @@ cookbook_file "vm_mode.sh" do
     path "/home/vagrant/vm_mode.sh"
     action :create
     mode '0744'
+    owner 'vagrant'
+    group 'vagrant'
 end
 
 execute "enable_pvm_overrides_apache" do
