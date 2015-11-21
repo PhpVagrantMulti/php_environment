@@ -28,7 +28,7 @@ end
 
 # Install php packages
 
-%w{php5-gearman php5-imagick php5-geoip php5-gmp php5-imap php5-intl php5-mcrypt php5-memcache php5-memcached php5-mhash php5-mysqlnd php5-mysqlnd-ms php5-oauth php5-ps php5-pspell php5-recode php5-redis php5-sqlite php5-tidy php5-xdebug php5-xhprof php5-xmlrpc php5-xsl}.each do |pkg|
+node["phpEnvironment"]["packages"].each do |pkg|
     package pkg do
         action :install
     end
