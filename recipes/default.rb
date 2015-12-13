@@ -63,15 +63,15 @@ cookbook_file "vm_mode.sh" do
 end
 
 # Create an extra-large couch for composer's enormous ass
-bash "extract_module" do
+bash "create_couch" do
   not_if { File.exists?("/var/swap.1") }
   code <<-EOH
     mkdir -p /var/cache/swap/
     dd if=/dev/zero of=/var/cache/swap/composers_couch bs=1M count=1024
     chmod 0600 /var/cache/swap/composers_couch
-    mkswap /var/cache/swap/composers_couch 
-    swapon /var/cache/swap/composers_couch
-    "/var/cache/swap/composers_couch    none    swap    sw    0   0" >> /etc/fstab
+    /sbin/mkswap /var/cache/swap/composers_couch 
+    /sbin/swapon /var/cache/swap/composers_couch
+    echo "/var/cache/swap/composers_couch    none    swap    sw    0   0" >> /etc/fstab
     EOH
 end
 
