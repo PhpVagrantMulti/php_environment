@@ -62,6 +62,19 @@ cookbook_file "vm_mode.sh" do
     mode '0744'
 end
 
+# Create an extra-large couch for composer's enormous ass
+bash "extract_module" do
+  not_if { File.exists?("/var/swap.1") }
+  code <<-EOH
+    mkdir -p /var/cache/swap/
+    dd if=/dev/zero of=/var/cache/swap/composers_couch bs=1M count=1024
+    chmod 0600 /var/cache/swap/composers_couch
+    mkswap /var/cache/swap/composers_couch 
+    swapon /var/cache/swap/composers_couch
+    "/var/cache/swap/composers_couch    none    swap    sw    0   0" >> /etc/fstab
+    EOH
+end
+
 execute "enable_pvm_overrides_apache" do
     not_if { File.exists?("/etc/php5/apache2/conf.d/99-pvm-overrides.ini") }
     command "sudo ln -s /etc/php5/mods-available/pvm-overrides.ini /etc/php5/apache2/conf.d/99-pvm-overrides.ini"
