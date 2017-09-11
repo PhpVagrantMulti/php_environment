@@ -35,17 +35,17 @@ if [ "$1" != "perf" -a "$1" != "dev" ]; then
 fi
 
 if [ "$1" == "perf" ]; then
-    php5dismod xdebug
+    phpdismod xdebug
     # xhprof is not active as of php7 at least for the time being
-    #php5dismod xhprof
-    php5enmod opcache
+    #phpdismod xhprof
+    phpenmod opcache
 fi
 
 if [ "$1" == "dev" ]; then
-    php5dismod opcache
+    phpdismod opcache
     # xhprof is not active as of php7 at least for the time being
-    #php5enmod xhprof
-    php5enmod xdebug
+    #phpenmod xhprof
+    phpenmod xdebug
 fi
 
 service apache2 restart

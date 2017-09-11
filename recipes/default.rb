@@ -30,10 +30,6 @@ if node["phpEnvironment"]["use_fpm"] == true
     end
 end
 
-package "php5-mysql" do
-    action :remove
-end
-
 # Install php packages
 
 node["phpEnvironment"]["packages"].each do |pkg|
@@ -55,12 +51,12 @@ execute "pear_install_phing" do
 end
 
 execute "enable_mcrypt" do
-    command "sudo php5enmod mcrypt"
+    command "sudo phpenmod mcrypt"
     action :run
 end
 
 cookbook_file "pvm-overrides.ini" do
-    path "/etc/php5/mods-available/pvm-overrides.ini"
+    path "/etc/php/7.0/mods-available/pvm-overrides.ini"
     action :create
 end
 
@@ -86,13 +82,13 @@ bash "create_couch" do
 end
 
 execute "enable_pvm_overrides_apache" do
-    not_if { File.exists?("/etc/php5/apache2/conf.d/99-pvm-overrides.ini") }
-    command "sudo ln -s /etc/php5/mods-available/pvm-overrides.ini /etc/php5/apache2/conf.d/99-pvm-overrides.ini"
+    not_if { File.exists?("/etc/php/7.0/cgi/conf.d/99-pvm-overrides.ini") }
+    command "sudo ln -s /etc/php/7.0/mods-available/pvm-overrides.ini /etc/php/7.0/cgi/conf.d/99-pvm-overrides.ini"
     action :run
 end
 
 execute "enable_pvm_overrides_cli" do
-    not_if { File.exists?("/etc/php5/cli/conf.d/99-pvm-overrides.ini") }
-    command "sudo ln -s /etc/php5/mods-available/pvm-overrides.ini /etc/php5/cli/conf.d/99-pvm-overrides.ini"
+    not_if { File.exists?("/etc/php/7.0/cli/conf.d/99-pvm-overrides.ini") }
+    command "sudo ln -s /etc/php/7.0/mods-available/pvm-overrides.ini /etc/php/7.0/cli/conf.d/99-pvm-overrides.ini"
     action :run
 end
