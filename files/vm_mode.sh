@@ -36,13 +36,15 @@ fi
 
 if [ "$1" == "perf" ]; then
     php5dismod xdebug
-    php5dismod xhprof
+    # xhprof is not active as of php7 at least for the time being
+    #php5dismod xhprof
     php5enmod opcache
 fi
 
 if [ "$1" == "dev" ]; then
     php5dismod opcache
-    php5enmod xhprof
+    # xhprof is not active as of php7 at least for the time being
+    #php5enmod xhprof
     php5enmod xdebug
 fi
 

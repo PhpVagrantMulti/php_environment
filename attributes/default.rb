@@ -23,3 +23,4 @@
 ##
 
 default["phpEnvironment"]["packages"] = []
+default["phpEnvironment"]["use_fpm"] = false
