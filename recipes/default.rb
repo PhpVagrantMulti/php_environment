@@ -89,7 +89,7 @@ execute "enable_pvm_overrides_cli" do
     action :run
 end
 
-if node["phpEnvironment"] == true do
+if node["phpEnvironment"] == true
     php_fpm_pool 'default' do
         action :install
     end
