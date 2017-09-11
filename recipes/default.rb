@@ -22,6 +22,14 @@
 # along with PhpVagrantMulti.  If not, see <http://www.gnu.org/licenses/>.
 ##
 
+# Install php-fpm if required
+
+if node["phpEnvironment"]["use_fpm"] == true
+    php_fpm_pool 'default' do
+        action :install
+    end
+end
+
 package "php5-mysql" do
     action :remove
 end
@@ -87,10 +95,4 @@ execute "enable_pvm_overrides_cli" do
     not_if { File.exists?("/etc/php5/cli/conf.d/99-pvm-overrides.ini") }
     command "sudo ln -s /etc/php5/mods-available/pvm-overrides.ini /etc/php5/cli/conf.d/99-pvm-overrides.ini"
     action :run
-end
-
-if node["phpEnvironment"] == true
-    php_fpm_pool 'default' do
-        action :install
-    end
 end
