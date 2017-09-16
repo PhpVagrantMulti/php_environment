@@ -28,9 +28,10 @@ if node["phpEnvironment"]["use_fpm"] == true
     php_fpm_pool 'default' do
         action :install
     end
-    
-    apache_conf "php7.0-fpm" do
-        enable true
+
+    execute "ensure php7.0-fpm is running" do
+        command "sudo a2enconf php7.0-fpm"
+        action :run
     end
 end
 
