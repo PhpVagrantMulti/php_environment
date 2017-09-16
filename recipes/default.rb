@@ -97,3 +97,13 @@ execute "enable_pvm_overrides_cli" do
     command "sudo ln -s /etc/php/7.0/mods-available/pvm-overrides.ini /etc/php/7.0/cli/conf.d/99-pvm-overrides.ini"
     action :run
 end
+
+# TODO: Move this to a more appropriate cookbook later
+if node["phpEnvironment"]["use_mysql"] == true
+    mysql_service 'default' do
+      port '3306'
+      version '5.7'
+      initial_root_password node["phpEnvironment"]["mysql_pw"]
+      action [:create, :start]
+    end
+end

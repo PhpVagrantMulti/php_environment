@@ -24,3 +24,5 @@
 
 default["phpEnvironment"]["packages"] = []
 default["phpEnvironment"]["use_fpm"] = false
+default["phpEnvironment"]["use_mysql"] = false
+default["phpEnvironment"]["mysql_pw"] = "vagrant"
