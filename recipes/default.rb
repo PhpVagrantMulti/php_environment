@@ -28,10 +28,6 @@ if node["phpEnvironment"]["use_fpm"] == true
     php_fpm_pool 'default' do
         action :install
     end
-
-    apache_conf 'php5-fpm' do
-        enable true
-    end
 end
 
 # Install php packages
