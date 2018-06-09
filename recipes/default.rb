@@ -98,7 +98,6 @@ execute "enable_pvm_overrides_cli" do
     action :run
 end
 
-# TODO: Move this to a more appropriate cookbook later
 if node["phpEnvironment"]["use_mysql"] == true
     mysql_service 'default' do
       port '3306'
