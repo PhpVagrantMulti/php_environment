@@ -87,7 +87,7 @@ execute "unpack_geolitecity" do
 end
 
 execute "replace_geolitecity" do
-    command "sudo cp /opt/GeoLiteCity.dat /usr/share/GeoIPCity.dat"
+    command "sudo cp /opt/GeoLiteCity.dat /usr/share/GeoIP/GeoIPCity.dat"
     action :run
 end
 
