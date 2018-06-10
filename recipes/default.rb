@@ -73,6 +73,25 @@ cookbook_file "vm_mode.sh" do
     group 'vagrant'
 end
 
+cookbook_file '/opt/GeoLiteCity.dat.gz' do
+    source 'GeoLiteCity.dat.gz'
+    owner 'vagrant'
+    group 'vagrant'
+    mode '0755'
+    action :create
+end
+
+execute "unpack_geolitecity" do
+    command "sudo gunzip -d /opt/GeoLiteCity.dat.gz"
+    action :run
+end
+
+execute "replace_geolitecity" do
+    command "sudo cp /opt/GeoLiteCity.dat /usr/share/GeoIPCity.dat"
+    action :run
+end
+
+
 # Create an extra-large couch for composer's enormous ass
 bash "create_couch" do
   not_if { File.exists?("/var/swap.1") }
